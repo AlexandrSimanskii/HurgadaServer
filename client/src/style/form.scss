@@ -1,0 +1,158 @@
+.register {
+  background-color: rgba(#000000, $alpha: 0.6);
+  padding: 10rem 2.1rem;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  &-error{
+    color: red;
+    font-weight: 600;
+  }
+
+  & input {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    font-size: 1.8rem;
+    width: 100%;
+    padding-left: 2rem;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: #000842;
+      font-size: 2rem;
+      font-family: Poppins;
+
+      font-weight: 400;
+    }
+  }
+  &__left {
+    border-radius: 4px 0 0 4px;
+    background-color: #fff;
+    padding: 5rem 4rem;
+    border: 1px solid red;
+    & label {
+      color: #999;
+      font-size: 0.92857rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 3rem;
+    }
+    & a span {
+      font-weight: 600;
+      color: #0c21c1;
+    }
+    & p {
+      margin-bottom: 2rem;
+    }
+    & h2 {
+      margin-bottom: 2rem;
+    }
+    & .form {
+      &__box-field {
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        margin-bottom: .2rem;
+        border-bottom: 2px solid #000842;
+
+        &_email::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          left: 0;
+          width: 17px;
+          height: 17px;
+          background: url(/images/image/message.svg);
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        &_username::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          left: 0;
+          width: 17px;
+          height: 17px;
+          background: url(/images/icons/profile-icon.svg);
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        &_password img{
+        width: 1.8rem;
+        height: 1.8rem;
+        background-repeat: no-repeat;
+        background-size: contain;
+        }
+        &_password::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          left: 0;
+          width: 17px;
+          height: 17px;
+          background: url(/images/icons/password.svg);
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        &_tel::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          left: 0;
+          width: 17px;
+          height: 17px;
+          background: url(/images/icons/phone-footer.svg);
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+     
+      }
+
+      &-field {
+        & p {
+          cursor: pointer;
+          margin-bottom: 0.8rem;
+        }
+      }
+      &-button {
+        background-color: #000842;
+        padding: 0.5rem 1rem;
+        width: 100%;
+        border-radius: 15px;
+        color: #fff;
+      }
+    }
+  }
+  &__right {
+    border-radius: 0 4px 4px 0;
+    background-color: #000842;
+  
+
+    // padding: 9.3rem 6.4rem;
+    & img {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 2.4rem;
+    }
+    & h3 {
+      color: white;
+    }
+  }
+}
