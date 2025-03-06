@@ -2,8 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-// import productsRouter from "./routes/products.router.js";
-// import authRouter from "./routes/auth.router.js";
+import authRouter from "../routes/auth.router.js";
+import excursion from "../routes/excursions.router.js";
+import nightLive from "../routes/nightlive.router.js";
+import food from "../routes/food.router.js";
+import estate from "../routes/estate.router.js";
 
 dotenv.config();
 
@@ -35,8 +38,11 @@ app.listen(PORT, () => {
 
 app.use(express.json());
 
-// app.use("/api/products", productsRouter);
-// app.use("/api/auth", authRouter);
+app.use("/api", authRouter);
+app.use("/api/excursions", excursion);
+app.use("/api/nights", nightLive);
+app.use("/api/foods", food);
+app.use("/api/estate", estate);
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Пиздец " });
