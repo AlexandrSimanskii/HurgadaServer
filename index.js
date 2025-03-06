@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+
 import authRouter from "../routes/auth.router.js";
 import excursion from "../routes/excursions.router.js";
 import nightLive from "../routes/nightlive.router.js";
@@ -38,11 +39,7 @@ app.listen(PORT, () => {
 
 app.use(express.json());
 
-app.use("/api", authRouter);
-app.use("/api/excursions", excursion);
-app.use("/api/nights", nightLive);
-app.use("/api/foods", food);
-app.use("/api/estate", estate);
+
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Пиздец " });
