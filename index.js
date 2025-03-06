@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-
-import authRouter from "routes/auth.router.js";
+// import productsRouter from "./routes/products.router.js";
+import authRouter from "./routes/auth.router.js";
 
 dotenv.config();
 
@@ -34,6 +34,9 @@ app.listen(PORT, () => {
 });
 
 app.use(express.json());
+
+// app.use("/api/products", productsRouter);
+// app.use("/api/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Пиздец " });
