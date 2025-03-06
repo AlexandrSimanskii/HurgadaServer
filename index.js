@@ -3,11 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import authRouter from "../routes/auth.router.js";
-import excursion from "../routes/excursions.router.js";
-import nightLive from "../routes/nightlive.router.js";
-import food from "../routes/food.router.js";
-import estate from "../routes/estate.router.js";
+import authRouter from "/routes/auth.router.js";
 
 dotenv.config();
 
@@ -38,8 +34,6 @@ app.listen(PORT, () => {
 });
 
 app.use(express.json());
-
-
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Пиздец " });
