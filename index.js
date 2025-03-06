@@ -13,13 +13,13 @@ dotenv.config();
 
 mongoose
   .connect(
-    "mongodb+srv://simabmv:simabmv@mebel.rqqf8m1.mongodb.net/?retryWrites=true&w=majority"
+    process.env.MONGO ||
+      "mongodb+srv://hurghada:hurghada@hurghada.f9gl5.mongodb.net/?retryWrites=true&w=majority&appName=hurghada"
   )
   .then(() => {
-    console.log("Connected to MongoDB");
+    console.log("Connect with MongoDB");
   })
-  .catch((err) => console.log("Failed to connect to MongoDB", err));
-
+  .catch((err) => console.log("Не удалось подключиться к MongoDB", err));
 
 const app = express();
 
@@ -40,11 +40,13 @@ app.listen(PORT, () => {
 
 app.use(express.json());
 
+// 1
 app.use("/api", authRouter);
 app.use("/api/excursions", excursion);
 app.use("/api/nights", nightLive);
 app.use("/api/foods", food);
 app.use("/api/estate", estate);
+// 1
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Пиздец " });
