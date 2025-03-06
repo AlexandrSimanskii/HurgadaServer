@@ -1,6 +1,6 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 import cors from "cors";
 
 import excursion from "./routes/excursions.router.js";
@@ -8,6 +8,8 @@ import nightLive from "./routes/nightlive.router.js";
 import food from "./routes/food.router.js";
 import estate from "./routes/estate.router.js";
 import authRouter from "./routes/auth.router.js";
+
+const app = express();
 
 dotenv.config();
 
@@ -21,39 +23,30 @@ mongoose
   })
   .catch((err) => console.log("Не удалось подключиться к MongoDB", err));
 
-const app = express();
-
-const PORT = process.env.PORT || 3004;
-const CORS_ORIGIN =
-  process.env.CORS_ORIGIN || "https://mebel-frontend.vercel.app";
+const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: CORS_ORIGIN,
+    origin: "https://hurgada-pi.vercel.app",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
     credentials: true,
   })
 );
 
+app.get("/api", (req, res) => res.send("Express on Vercel"));
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+  console.log("Server is running on port 3000");
 });
 
 app.use(express.json());
 
-// 1
 app.use("/api", authRouter);
 app.use("/api/excursions", excursion);
 app.use("/api/nights", nightLive);
 app.use("/api/foods", food);
 app.use("/api/estate", estate);
-// 1
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Пиздец " });
-});
-
-app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = "Not Found" || "Internal Server Error";
-  return res.status(statusCode).json({ success: false, statusCode, message });
 });
