@@ -1,55 +1,57 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-// import cookieParser from "cookie-parser";
-// import authRouter from "../routes/auth.router.js";
-
-// import food from "../routes/food.router.js";
-// import estate from "../routes/estate.router.js";
-// import excursion from "../routes/excursions.router.js";
-// import nightLive from "../routes/nightlive.router.js";
-
-// import cors from "cors";
-
-const app = express();
+import productsRouter from "./routes/products.router.js";
+import authRouter from "./routes/auth.router.js";
+import cors from "cors"
 
 dotenv.config();
 
 mongoose
-  .connect(
-    process.env.MONGO ||
-      "mongodb+srv://hurghada:hurghada@hurghada.f9gl5.mongodb.net/?retryWrites=true&w=majority&appName=hurghada"
-  )
+  .connect("mongodb+srv://simabmv:simabmv@mebel.rqqf8m1.mongodb.net/?retryWrites=true&w=majority")
   .then(() => {
-    console.log("Connect with MongoDB");
+    console.log("Connected to MongoDB");
   })
-  .catch((err) => console.log("Не удалось подключиться к MongoDB", err));
+  .catch((err) => console.log("Failed to connect to MongoDB", err));
 
-const PORT = process.env.PORT || 3000;
+const app = express();
 
-app.use(
-  cors({
-    origin: "https://hurgada-pi.vercel.app",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials: true,
-  })
-);
+const PORT = process.env.PORT || 3004;
+const CORS_ORIGIN = process.env.CORS_ORIGIN || "https://mebel-frontend.vercel.app";
 
-app.get("/api", (req, res) => res.send("Express on Vercel"));
+
+app.use(cors({
+  origin: CORS_ORIGIN,
+  credentials: true,
+}));
+
 app.listen(PORT, () => {
-  console.log("Server is running on port 3000");
+  console.log(`Server is listening on port ${PORT}`);
 });
 
-app.use(cookieParser());
+
+
+
+
+
+
+
 app.use(express.json());
 
-// app.use("/api", authRouter);
-// app.use("/api/excursions", excursion);
-// app.use("/api/nights", nightLive);
-// app.use("/api/foods", food);
-// app.use("/api/estate", estate);
+app.use("/api/products", productsRouter);
+app.use("/api/auth", authRouter);
+
+
+
+
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Пиздец " });
 });
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = "Not Found" || "Internal Server Error";
+  return res.status(statusCode).json({ success: false, statusCode, message });
+});
+
